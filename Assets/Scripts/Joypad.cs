@@ -9,21 +9,25 @@ public class Joypad : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
     [SerializeField] private RectTransform recFront;
     private float radius;
 
+    private Vector3 input = Vector3.zero;
+    public float Horizontal { get { return input.x; } }
+    public float Vertical { get { return input.y; } }
+
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 value = eventData.position - (Vector2)rectBack.position;
-        value = Vector2.ClampMagnitude(value, radius);
-        recFront.localPosition = value;
+        input = Vector2.ClampMagnitude(
+            eventData.position - (Vector2)rectBack.position,
+            radius);
+        recFront.localPosition = input;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //throw new System.NotImplementedException();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        recFront.localPosition = Vector3.zero;
+        recFront.localPosition = input = Vector3.zero;
     }
 
     // Start is called before the first frame update
