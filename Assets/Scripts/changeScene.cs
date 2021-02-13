@@ -9,5 +9,13 @@ public class changeScene : MonoBehaviour
     public void changeMe()
     {
         SceneManager.LoadScene("SampleScene");
-    }  
+    }
+
+
+    public void compositeScene()
+    {
+
+        SceneManager.LoadScene("ThirdScene", LoadSceneMode.Additive);
+    }
+
 }
